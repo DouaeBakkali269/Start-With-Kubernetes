@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volume-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: volume-demo
+  template:
+    metadata:
+      labels:
+        app: volume-demo
+    spec:
+      containers:
+        - name: busybox
+          image: busybox
+          command: [ "sleep", "3600" ]
+          volumeMounts:
+            - name: my-storage
+              mountPath: /data
+      volumes:
+        - name: my-storage
+          persistentVolumeClaim:
+            claimName: demo-pvc
