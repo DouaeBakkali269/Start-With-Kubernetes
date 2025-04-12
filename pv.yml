@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: demo-pv  # The name of the PersistentVolume, uniquely identifying it in the cluster.
+spec:
+  capacity:
+    storage: 1Gi  # The storage capacity of the PersistentVolume (1Gi = 1 gibibyte).
+  accessModes:
+    - ReadWriteOnce  # Access mode: the volume can be mounted as read-write by a single node.
+  hostPath:
+    path: /data/pv1  # The directory on the host machine that backs this PersistentVolume.
