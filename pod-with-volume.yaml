@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: pod
+metadata:
+  name: volume-demo-pod
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: [ "sleep" , "3600" ]
+      volumeMounts:
+        - mountPath: "/data"  # The path inside the container where the volume will be mounted.
+          name: my-storage # The name of the volume to mount, which should match the name defined in the volumes section. 
+  volumes:
+    - name: my-storage  # The name of the volume, which must match the name in the volumeMounts section.
+      persistentVolumeClaim:
+        claimName: demo-pvc  # The name of the PersistentVolumeClaim to use for this volume.
